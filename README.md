@@ -1,5 +1,5 @@
 # habana_paca
-PaCA (**Pa**rtial **C**onnection **A**daptation) is new parameter-efficient fine-tuning (PEFT) algorithms for enhancing performance. PaCA not only reduces activation memory by storing only partial activations for backward propagation, but also reduces training time by eliminating additional sequential process by additional adapter layers as below:
+**PaCA** (**Pa**rtial **C**onnection **A**daptation) is new parameter-efficient fine-tuning (PEFT) algorithms for enhancing performance. PaCA not only reduces activation memory by storing only partial activations for backward propagation, but also reduces training time by eliminating additional sequential process by additional adapter layers as below:
 
 ![PaCA_FIG](https://github.com/user-attachments/assets/cfb6aa0d-cf53-4a32-97f1-a2a522b9a1dc)
 
