@@ -14,51 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-# PaCA with Gauid HPU
-
-## Requirements
-
-First, you should install the requirements:
-```bash
-pip install -r requirements.txt
-```
-
-## Scripts for training PaCA
-
-+ Just add `--peft-tpye "paca"` for training with PaCA.
-+ You can adjust rank or target modules of paca by using as `--lora_rank 8` and `--lora_target_modules "q_proj" "v_proj" "k_proj" "o_proj" "up_proj" "down_proj" "gate_proj"`, respectively. 
-+ If you want to measure the throughput, add `--measure_time`, `time_warmup_steps 3`, `time_measure_steps 100`, and `throughput_path PATH`. 
-
-```bash
-HABANA_VISIBLE_DEVICES=0 python3 ../gaudi_spawn.py --world_size 1 run_lora_clm.py \
-                --deepspeed ds_config.json \
-                --model_name_or_path meta-llama/Meta-Llama-3-8B \
-                --dataset_name timdettmers/openassistant-guanaco \
-                --bf16 True \
-                --output_dir ./model_lora_llama \
-                --num_train_epochs 2 \
-                --max_seq_len 512 \
-                --per_device_train_batch_size ${train_bs} \
-                --save_strategy no \
-                --learning_rate 0.0018 \
-                --warmup_ratio 0.03 \
-                --lr_scheduler_type "cosine" \
-                --logging_steps 1 \
-                --dataset_concatenation \
-                --attn_softmax_bf16 True \
-                --do_train \
-                --use_habana \
-                --use_flash_attention \
-                --report_to none \
-                --peft_type "paca" \
-                --lora_rank 8  \
-                --lora_target_modules "q_proj" "v_proj" "k_proj" "o_proj" "up_proj" "down_proj" "gate_proj"\
-                --throughput_warmup_steps 3 \
-                --adjust_throughput \
-                ```
-
-# BELOW is examples of using optimal habana for various training methods.
-
 # Language Model Training
 
 Fine-tuning (or training from scratch) the library models for language modeling on a text dataset.
@@ -913,7 +868,8 @@ python3 ../gaudi_spawn.py --world_size 8 --use_mpi peft_poly_seq2seq_with_genera
     --per_device_eval_batch_size 4 \
     --bf16 \
     --use_hpu_graphs_for_inference \
-    --use_hpu_graphs_for_training
+    --use_hpu_graphs_for_training \
+    --trust_remote_code
 ```
 
 
