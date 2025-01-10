@@ -561,22 +561,37 @@ def main():
         )
     else:
         raise ValueError("Unsupported dataset")
-    # Load model
-    # Load model
+    
+    # Load model.
     if model_args.model_name_or_path:
         model_dtype = torch.bfloat16 if training_args.bf16 else None
-        model = AutoModelForCausalLM.from_pretrained(
-            model_args.model_name_or_path,
-            from_tf=bool(".ckpt" in model_args.model_name_or_path),
-            config=config,
-            cache_dir=model_args.cache_dir,
-            revision=model_args.model_revision,
-            trust_remote_code=True if model_args.trust_remote_code else None,
-            torch_dtype=model_dtype,
-            low_cpu_mem_usage=model_args.low_cpu_mem_usage,
-            device_map=training_args.device.type if model_args.load_meta_device else None,
-            token=model_args.token,
-        )
+        if training_args.measure_time:
+            model = AutoModelForCausalLM.from_pretrained(
+                model_args.model_name_or_path,
+                from_tf=bool(".ckpt" in model_args.model_name_or_path),
+                config=config,
+                cache_dir=model_args.cache_dir,
+                revision=model_args.model_revision,
+                trust_remote_code=True if model_args.trust_remote_code else None,
+                torch_dtype=model_dtype,
+                low_cpu_mem_usage=model_args.low_cpu_mem_usage,
+                device_map=training_args.device.type if model_args.load_meta_device else None,
+                token=model_args.token,
+            )
+        else:
+            model = AutoModelForCausalLM.from_pretrained(
+                model_args.model_name_or_path,
+                from_tf=bool(".ckpt" in model_args.model_name_or_path),
+                config=config,
+                cache_dir=model_args.cache_dir,
+                revision=model_args.model_revision,
+                trust_remote_code=True if model_args.trust_remote_code else None,
+                torch_dtype=model_dtype,
+                low_cpu_mem_usage=model_args.low_cpu_mem_usage,
+                device_map=training_args.device.type if model_args.load_meta_device else None,
+                token=model_args.token,
+            )
+            
     else:
         raise ValueError("Must provide model_name_or_path to load a pretrained CausalLM model.")
 
