@@ -1,6 +1,9 @@
 # PaCA
 **PaCA** (**Pa**rtial **C**onnection **A**daptation) is new parameter-efficient fine-tuning (PEFT) algorithm for enhancing performance. PaCA not only reduces activation memory by storing only partial activations for backward propagation, but also reduces training time by eliminating additional sequential process by additional adapter layers as below:
 
+![image](https://github.com/user-attachments/assets/9b59b1b9-a4dd-4513-84e7-fc9e3551bbce)
+
+
 ## how to use
 1. download custom peft library which supports PaCA.
 ```
