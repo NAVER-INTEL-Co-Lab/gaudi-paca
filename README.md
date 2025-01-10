@@ -14,13 +14,13 @@
 pip install -q git+https://github.com/HabanaAI/DeepSpeed.git@1.18.0
 ```
 
-2.  Install the custom optimum-habana library for applying DropBP
+2.  Install the custom optimum-habana library
  ```bash
 cd ./optimum-habana
 pip install -v -e .
 ```
 
-3. Install the PaCA library for HPU.
+3. Install the PEFT library which supports PaCA.
 ```bash
 cd ./peft
 pip install -v -e .
