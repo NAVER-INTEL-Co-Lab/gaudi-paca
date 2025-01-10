@@ -4,13 +4,30 @@
 ![image](https://github.com/user-attachments/assets/9b59b1b9-a4dd-4513-84e7-fc9e3551bbce)
 
 
-## how to use
-1. download custom peft library which supports PaCA.
+# PaCA
+**PaCA** (**Pa**rtial **C**onnection **A**daptation) is new parameter-efficient fine-tuning (PEFT) algorithm for enhancing performance. PaCA not only reduces activation memory by storing only partial activations for backward propagation, but also reduces training time by eliminating additional sequential process by additional adapter layers as below:
+
+## Setup
+
+1. Install the required dependencies
+```bash
+pip install -q git+https://github.com/HabanaAI/DeepSpeed.git@1.18.0
 ```
-cd peft
+
+2.  Install the custom optimum-habana library for applying DropBP
+ ```bash
+cd ./optimum-habana
 pip install -v -e .
 ```
-2. use paca as follow
+
+3. Install the PaCA library for HPU.
+```bash
+cd ./peft
+pip install -v -e .
+```   
+
+
+## How to apply PaCA for fine-tuning 
 ```
 from peft import PacaConfig, get_peft_model
 
@@ -25,3 +42,10 @@ peft_config = PacaConfig(
 model = get_peft_model(model, peft_config)
 ```
 
+## Examples 
+
+Once the environment is set up, you can begin the fine-tuning process with the provided scripts. The scripts for running DropBP are as follows:
+
+```bash
+sh ./examples/paca.sh # DropBP
+```
