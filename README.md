@@ -44,7 +44,7 @@ model = get_peft_model(model, peft_config)
 
 ## Examples 
 
-Once the environment is set up, you can begin the fine-tuning process with the provided scripts. The scripts for running DropBP are as follows:
+Once the environment is set up, you can begin the fine-tuning process with the provided scripts. The scripts for running PaCA are as follows:
 
 ```bash
 sh ./examples/paca.sh # PaCA
